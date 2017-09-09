@@ -83,7 +83,7 @@ app.use('/', function(req, res) {
 
 // app.use('/', express.static(__dirname + '/'));
 
-app.listen(3000, function() {
+.listen(process.env.PORT || 5000, function() {
   console.log('Listening on port 3000!')
 })
 
