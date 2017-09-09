@@ -1,8 +1,8 @@
-
-
+//Require in npm modules to parse, and write csv files
 var babyParse = require('babyparse'),
   csv = require('ya-csv'),
   fs = require('fs'),
+  path = require('path'),
   writer = csv.createCsvStreamWriter(fs.createWriteStream('results.csv'), {'quote':''}),
   customersFilePath = 'data/customers.csv',
   systemsFilePath = 'data/systems.csv',
@@ -15,9 +15,6 @@ var babyParse = require('babyparse'),
   customersArray = [],
   systemsArray = [],
   resultsArray = [];
-
-/* Using babyParse object to parse customer
-*/
 
 babyParse.parse(customersRawData, {
   header: true,
@@ -49,7 +46,6 @@ babyParse.parse(systemsRawData, {
   }
 });
 
-// // console.log('customers array loop')
 customersArray.forEach(function(customer) {
   let customerCostOfPower = customer.utility_bill_usd.toFixed(2) / customer.energy_usage_kwh
 
@@ -69,23 +65,23 @@ writer.writeRecord(['customer_id', 'system_id', 'payback_months']);
 writer = csv.createCsvStreamWriter(fs.createWriteStream('results.csv', {'flags': 'a'}), {'quote':''});
 
 resultsArray.forEach(function(result) {
-  console.log('Writing to file', result);
   writer.writeRecord([result.customer_id, result.system_id, result.payback_months])
 })
 
 
+
+//created a small server to serve the results.csv from heroku deployment
 var express = require('express'),
     app = express();
 
 app.use('/', function(req, res) {
-  res.send(resultsArray);
-})
+  var csv = __dirname+'/results.csv';
 
-// app.use('/', express.static(__dirname + '/'));
+  res.setHeader('Content-disposition', 'attachment; filename=results.csv');
+  res.set('Content-Type', 'text/csv');
+  res.status(200).sendFile(csv);
+});
 
-.listen(process.env.PORT || 5000, function() {
+app.listen(process.env.PORT || 5000, function() {
   console.log('Listening on port 3000!')
-})
-
-
-console.log('resultsArray', resultsArray)
+});
