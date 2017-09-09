@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babyparse": "^0.4.6"
+    "babyparse": "^0.4.6",
+    "express": "^4.15.4",
+    "ya-csv": "^0.10.1"
   }
 }
