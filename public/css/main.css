@@ -111,15 +111,12 @@ header {
 
 #results-panel {
   text-align: center;
-
   min-height: 60%;
   margin-bottom: 17px;
 }
 
 #customer-panel {
   border-right: 3px;
-  
-
   overflow-y: scroll;
   height: 300px;
 }

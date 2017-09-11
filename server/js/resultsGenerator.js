@@ -18,8 +18,6 @@ var babyParse = require('babyparse'),
   systemsArray = [],
   resultsArray = [];
 
-
-
 babyParse.parse(customersRawData, {
   header: true,
   step: function(row) {
@@ -61,6 +59,7 @@ customersArray.forEach(function(customer) {
     result.customer_id = customer.customer_id;
     result.system_id = system.system_id;
     result.payback_months = Math.floor(payback_months);
+    if (result.payback_months > 240) result.payback_months = '';
     resultsArray.push(result);
   });
 });
@@ -75,9 +74,6 @@ writer = csv.createCsvStreamWriter(fs.createWriteStream('server/data/results.csv
 resultsArray.forEach(function(result) {
   writer.writeRecord([result.customer_id, result.system_id, result.payback_months])
 })
-
-
-
 
 module.exports = {
   results: resultsArray,
