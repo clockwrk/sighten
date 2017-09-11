@@ -111,23 +111,22 @@ header {
 
 #results-panel {
   text-align: center;
-  border-style: solid;
-  border-width: .25px;
+
   min-height: 60%;
+  margin-bottom: 17px;
 }
 
 #customer-panel {
-  border-style: solid;
-  border-width: .25%;
+  border-right: 3px;
+  
+
   overflow-y: scroll;
-  height: 500px;
+  height: 300px;
 }
 
 #system-panel {
-  border-style: solid;
-  border-width: .25%;
   overflow-y: scroll;
-  height: 100px;
+  height: 300px;
 }
 
 #bottom {

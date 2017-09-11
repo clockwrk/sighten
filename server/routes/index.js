@@ -29,7 +29,7 @@ router.get('/data', function(req, res) {
 	var data = {};
 			data.results = resultsGenerator.results;
 			data.customers = resultsGenerator.customers;
-			data.results = resultsGenerator.results;
+			data.systems = resultsGenerator.systems;
   res.send(data);
 });
 
